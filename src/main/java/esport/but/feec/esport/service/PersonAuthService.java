@@ -1,6 +1,7 @@
 package esport.but.feec.esport.service;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
+import esport.but.feec.esport.api.PersonAuthView;
 import esport.but.feec.esport.data.PersonRepository;
 import esport.but.feec.esport.exceptions.ResourceNotFoundException;
 
