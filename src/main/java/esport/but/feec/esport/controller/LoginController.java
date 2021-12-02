@@ -1,16 +1,9 @@
 package esport.but.feec.esport.controller;
 
-import esport.but.feec.esport.data.PersonRepository;
-import esport.but.feec.esport.service.PersonAuthService;
-import org.but.feec.javafx.App;
-import org.but.feec.javafx.data.PersonRepository;
-import org.but.feec.javafx.exceptions.DataAccessException;
-import org.but.feec.javafx.exceptions.ExceptionHandler;
-import org.but.feec.javafx.exceptions.ResourceNotFoundException;
-import org.but.feec.javafx.services.AuthService;
-
 import de.jensd.fx.glyphs.GlyphsDude;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import esport.but.feec.esport.data.PersonRepository;
+import esport.but.feec.esport.service.PersonAuthService;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;

@@ -14,7 +14,7 @@ import java.util.Properties;
 
 public class config {
 
-        private static final Logger logger = LoggerFactory.getLogger(DataSourceConfig.class);
+        private static final Logger logger = LoggerFactory.getLogger(DataSource.class);
 
         private static HikariConfig config = new HikariConfig();
         private static HikariDataSource ds;
@@ -22,7 +22,7 @@ public class config {
         private static final String APPLICATION_PROPERTIES = "application.properties";
 
         static {
-            try (InputStream resourceStream = DataSourceConfig.class.getClassLoader().getResourceAsStream(APPLICATION_PROPERTIES)) {
+            try (InputStream resourceStream = DataSource.class.getClassLoader().getResourceAsStream(APPLICATION_PROPERTIES)) {
                 Properties properties = new Properties();
 
                 properties.load(resourceStream);
@@ -38,7 +38,7 @@ public class config {
             }
         }
 
-        private DataSourceConfig() {
+        private config() {
         }
 
         public static DataSource getDataSource() {
