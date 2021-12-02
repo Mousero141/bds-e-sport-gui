@@ -1,4 +1,5 @@
 package esport.but.feec.esport;
+import esport.but.feec.esport.exceptions.ExceptionHandler;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -31,7 +32,7 @@ import javafx.stage.Stage;
                 primaryStage.setScene(scene);
                 primaryStage.show();
             } catch (Exception ex) {
-                //ExceptionHandler.handleException(ex); FIX THIS
+                ExceptionHandler.handleException(ex);
             }
         }
 
