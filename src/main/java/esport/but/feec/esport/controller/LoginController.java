@@ -8,6 +8,8 @@ import esport.but.feec.esport.exceptions.ResourceNotFoundException;
 import esport.but.feec.esport.service.PersonAuthService;
 import de.jensd.fx.glyphs.GlyphsDude;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import esport.but.feec.esport.data.PersonRepository;
+import esport.but.feec.esport.service.PersonAuthService;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
