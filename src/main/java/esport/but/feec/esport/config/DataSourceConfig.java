@@ -1,4 +1,4 @@
-package esport.but.feec.esport.config.DataSource;
+package esport.but.feec.esport.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -12,7 +12,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public class config {
+public class DataSourceConfig {
 
         private static final Logger logger = LoggerFactory.getLogger(DataSource.class);
 
@@ -38,7 +38,7 @@ public class config {
             }
         }
 
-        private config() {
+        private DataSourceConfig() {
         }
 
         public static DataSource getDataSource() {

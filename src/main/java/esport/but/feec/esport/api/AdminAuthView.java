@@ -1,6 +1,6 @@
 package esport.but.feec.esport.api;
 
-public class PersonAuthView {
+public class AdminAuthView {
     private String email;
     private String password;
 

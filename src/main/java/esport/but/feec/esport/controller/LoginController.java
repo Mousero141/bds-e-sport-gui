@@ -1,15 +1,13 @@
 package esport.but.feec.esport.controller;
 
 import esport.but.feec.esport.App;
-import esport.but.feec.esport.data.PersonRepository;
+import esport.but.feec.esport.data.AdminRepository;
 import esport.but.feec.esport.exceptions.DataAccessException;
 import esport.but.feec.esport.exceptions.ExceptionHandler;
 import esport.but.feec.esport.exceptions.ResourceNotFoundException;
-import esport.but.feec.esport.service.PersonAuthService;
+import esport.but.feec.esport.service.AdminAuthService;
 import de.jensd.fx.glyphs.GlyphsDude;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
-import esport.but.feec.esport.data.PersonRepository;
-import esport.but.feec.esport.service.PersonAuthService;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -48,8 +46,8 @@ public class LoginController {
     @FXML
     private PasswordField passwordTextField;
 
-    private PersonRepository personRepository;
-    private PersonAuthService authService;
+    private AdminRepository adminRepository;
+    private AdminAuthService authService;
 
     private ValidationSupport validation;
 
@@ -87,8 +85,8 @@ public class LoginController {
     }
 
     private void initializeServices() {
-        personRepository = new PersonRepository();
-        authService = new PersonAuthService(personRepository);
+        adminRepository = new AdminRepository();
+        authService = new AdminAuthService(adminRepository);
     }
 
     private void initializeLogos() {
