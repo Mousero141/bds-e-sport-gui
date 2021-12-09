@@ -1,9 +1,6 @@
 package esport.but.feec.esport.data;
 
-import esport.but.feec.esport.api.AdminAuthView;
-import esport.but.feec.esport.api.AdminBasicView;
-import esport.but.feec.esport.api.AdminCreateView;
-import esport.but.feec.esport.api.AdminDetailView;
+import esport.but.feec.esport.api.*;
 import esport.but.feec.esport.config.DataSourceConfig;
 import esport.but.feec.esport.exceptions.DataAccessException;
 
@@ -15,8 +12,8 @@ public class AdminRepository {public AdminAuthView findPersonByEmail(String emai
     try (Connection connection = DataSourceConfig.getConnection();
          PreparedStatement preparedStatement = connection.prepareStatement(
                  "SELECT email, pwd" +
-                         " FROM bds.person p" +
-                         " WHERE p.email = ?")
+                         " FROM admin a" +
+                         " WHERE a.email = ?")
     ) {
         preparedStatement.setString(1, email);
         try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -25,7 +22,7 @@ public class AdminRepository {public AdminAuthView findPersonByEmail(String emai
             }
         }
     } catch (SQLException e) {
-        throw new DataAccessException("Find person by ID with addresses failed.", e);
+        throw new DataAccessException("Find admin by ID with addresses failed.", e);
     }
     return null;
 }
@@ -33,7 +30,7 @@ public class AdminRepository {public AdminAuthView findPersonByEmail(String emai
     public AdminDetailView findAdminDetailedView(Long personId) {
         try (Connection connection = DataSourceConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
-                     "SELECT id_person, email, first_name, surname, nickname, city, house_number, street" +
+                     "SELECT admin_id, nickname, given, surname, nickname, city, house_number, street" +
                              " FROM bds.person p" +
                              " LEFT JOIN bds.address a ON p.id_address = a.id_address" +
                              " WHERE p.id_person = ?")
@@ -94,18 +91,18 @@ public class AdminRepository {public AdminAuthView findPersonByEmail(String emai
         }
     }
 
-    public void editPerson(PersonEditView personEditView) {
-        String insertPersonSQL = "UPDATE bds.person p SET email = ?, first_name = ?, nickname = ?, surname = ? WHERE p.id_person = ?";
-        String checkIfExists = "SELECT email FROM bds.person p WHERE p.id_person = ?";
+    public void editPerson(AdminEditView personEditView) {
+        String insertPersonSQL = "UPDATE admin a SET email = ?, first_name = ?, nickname = ?, surname = ? WHERE a.admin_id = ?";
+        String checkIfExists = "SELECT email FROM admin a WHERE a.admin_id = ?";
         try (Connection connection = DataSourceConfig.getConnection();
              // would be beneficial if I will return the created entity back
              PreparedStatement preparedStatement = connection.prepareStatement(insertPersonSQL, Statement.RETURN_GENERATED_KEYS)) {
             // set prepared statement variables
-            preparedStatement.setString(1, personEditView.getEmail());
-            preparedStatement.setString(2, personEditView.getFirstName());
-            preparedStatement.setString(3, personEditView.getNickname());
-            preparedStatement.setString(4, personEditView.getSurname());
-            preparedStatement.setLong(5, personEditView.getId());
+            preparedStatement.setString(1, AdminEditView.getEmail());
+            preparedStatement.setString(2, AdminEditView.getFirstName());
+            preparedStatement.setString(3, AdminEditView.getNickname());
+            preparedStatement.setString(4, AdminEditView.getSurname());
+            preparedStatement.setLong(5, AdminEditView.getId());
 
             try {
                 // TODO set connection autocommit to false
@@ -149,18 +146,18 @@ public class AdminRepository {public AdminAuthView findPersonByEmail(String emai
         return person;
     }
 
-    private PersonBasicView mapToPersonBasicView(ResultSet rs) throws SQLException {
-        PersonBasicView personBasicView = new PersonBasicView();
-        personBasicView.setId(rs.getLong("id_person"));
-        personBasicView.setEmail(rs.getString("email"));
-        personBasicView.setGivenName(rs.getString("first_name"));
-        personBasicView.setFamilyName(rs.getString("surname"));
-        personBasicView.setNickname(rs.getString("nickname"));
-        personBasicView.setCity(rs.getString("city"));
+    private AdminBasicView mapToPersonBasicView(ResultSet rs) throws SQLException {
+        AdminBasicView personBasicView = new AdminBasicView();
+        AdminBasicView.setAdminId(rs.getLong("id_person"));
+        AdminBasicView.setEmail(rs.getString("email"));
+        AdminBasicView.setGivenName(rs.getString("first_name"));
+        AdminBasicView.setFamilyName(rs.getString("surname"));
+        AdminBasicView.setNickname(rs.getString("nickname"));
+        AdminBasicView.setCity(rs.getString("city"));
         return personBasicView;
     }
 
-    private PersonDetailView mapToAdminDetailView(ResultSet rs) throws SQLException {
+    private AdminDetailView mapToAdminDetailView(ResultSet rs) throws SQLException {
         PersonDetailView personDetailView = new PersonDetailView();
         personDetailView.setId(rs.getLong("id_person"));
         personDetailView.setEmail(rs.getString("email"));

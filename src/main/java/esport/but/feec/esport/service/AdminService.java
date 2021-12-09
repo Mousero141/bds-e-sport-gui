@@ -1,6 +1,8 @@
 package esport.but.feec.esport.service;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
+import esport.but.feec.esport.api.AdminCreateView;
+import esport.but.feec.esport.api.AdminDetailView;
 import esport.but.feec.esport.data.AdminRepository;
 
 import java.util.List;
@@ -21,7 +23,7 @@ public class AdminService {private AdminRepository adminRepository;
 
     public void createPerson(AdminDetailView personCreateView) {
         // the following three lines can be written in one code line (only for more clear explanation it is written in three lines
-        char[] originalPassword = personCreateView.getPwd();
+        char[] originalPassword = AdminCreateView.getPwd();
         char[] hashedPassword = hashPassword(originalPassword);
         personCreateView.setPwd(hashedPassword);
 
