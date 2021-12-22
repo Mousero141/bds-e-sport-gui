@@ -13,8 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="fpga" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="org.but.feec.esport.controller.LoginController">
+<VBox fx:id="fpga" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.but.feec.esport.controllers.LoginController">
     <children>
         <HBox>
             <VBox.margin>
@@ -23,7 +22,7 @@
         </HBox>
         <Pane prefHeight="363.0" prefWidth="600.0">
             <children>
-                <Label fx:id="vutlogo" layoutX="200.0" layoutY="95.0" prefHeight="17.0" prefWidth="62.0" />
+                <Label fx:id="lolLogo" layoutX="100" layoutY="69" prefHeight="81.0" prefWidth="343.0" />
                 <Label layoutX="75.0" layoutY="40.0" text="Welcome to e-Sport database">
                     <font>
                         <Font size="26.0" />

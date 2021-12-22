@@ -1,5 +1,5 @@
 package org.but.feec.esport.exceptions;
-import org.but.feec.esport.controller.LoginController;
+import org.but.feec.esport.controllers.LoginController;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import org.slf4j.Logger;

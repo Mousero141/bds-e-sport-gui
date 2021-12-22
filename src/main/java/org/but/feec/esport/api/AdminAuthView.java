@@ -22,7 +22,7 @@ public class AdminAuthView {
 
     @Override
     public String toString() {
-        return "PersonAuthView{" +
+        return "AdminAuthView{" +
                 "email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';

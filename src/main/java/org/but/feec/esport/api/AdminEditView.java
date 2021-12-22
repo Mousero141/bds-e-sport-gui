@@ -27,7 +27,7 @@ public class AdminEditView {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public void setGivenName(String firstName) {
         this.firstName = firstName;
     }
 

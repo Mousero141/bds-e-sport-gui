@@ -19,17 +19,13 @@ public class App extends Application {
         @Override
         public void start(Stage primaryStage) {
             try {
-                loader = new FXMLLoader(getClass().getResource("/main/resources/org.but.feec.esport/Login.fxml"));
+                loader = new FXMLLoader(getClass().getResource("/org.but.feec.esport/Login.fxml"));
                 mainStage = loader.load();
 
                 primaryStage.setTitle("BDS E-Sport");
                 Scene scene = new Scene(mainStage);
-                setUserAgentStylesheet(STYLESHEET_MODENA);
-                String myStyle = getClass().getResource("css/myStyle.css").toExternalForm();
-                scene.getStylesheets().add(myStyle);
 
-                primaryStage.getIcons().add(new Image(App.class.getResourceAsStream("logos/logo.png")));
-
+                primaryStage.getIcons().add(new Image(App.class.getResourceAsStream("/org.but.feec.esport/logos/Riot_logo.png")));
                 primaryStage.setScene(scene);
                 primaryStage.show();
             } catch (Exception ex) {

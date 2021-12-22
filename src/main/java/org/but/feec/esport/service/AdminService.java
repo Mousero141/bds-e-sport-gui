@@ -1,9 +1,13 @@
 package org.but.feec.esport.service;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
+import org.but.feec.esport.api.AdminBasicView;
+import org.but.feec.esport.api.AdminCreateView;
 import org.but.feec.esport.api.AdminDetailView;
 import org.but.feec.esport.api.AdminEditView;
 import org.but.feec.esport.data.AdminRepository;
+
+import java.util.List;
 
 public class AdminService {private AdminRepository adminRepository;
 
@@ -11,35 +15,26 @@ public class AdminService {private AdminRepository adminRepository;
         this.adminRepository = adminRepository;
     }
 
-    public AdminDetailView getPersonDetailView(Long id) {
+    public AdminDetailView getAdminDetailView(Long id) {
         return adminRepository.findAdminDetailedView(id);
     }
 
-    /**public List<AdminDetailView> getPersonsBasicView() {
-        return adminRepository.getAdminBasicView();
-    }*/
+    public List<AdminBasicView> getAdminsBasicView() {
+        return adminRepository.getAdminsBasicView();
+    }
 
-    /**public void createPerson(AdminDetailView adminCreateView) {
-        // the following three lines can be written in one code line (only for more clear explanation it is written in three lines
-        char[] originalPassword = AdminCreateView.getPwd();
+    public void createPerson(AdminCreateView adminCreateView) {
+        char[] originalPassword = adminCreateView.getPwd();
         char[] hashedPassword = hashPassword(originalPassword);
         adminCreateView.setPwd(hashedPassword);
 
-        adminRepository.createPerson(adminCreateView);
-    }*/
-
-    public void editPerson(AdminEditView adminEditView) {
-        adminRepository.editPerson(adminEditView);
+        adminRepository.createAdmin(adminCreateView);
     }
 
-    /**
-     * <p>
-     * Note: For implementation details see: https://github.com/patrickfav/bcrypt
-     * </p>
-     *
-     * @param password to be hashed
-     * @return hashed password
-    */
+    public void editAdmin(AdminEditView adminEditView) {
+        adminRepository.editAdmin(adminEditView);
+    }
+
     private char[] hashPassword(char[] password) {
         return BCrypt.withDefaults().hashToChar(12, password);
     }

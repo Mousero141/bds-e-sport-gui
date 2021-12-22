@@ -13,6 +13,11 @@ public class AdminBasicView {
      private StringProperty given_name = new SimpleStringProperty();
      private StringProperty family_name = new SimpleStringProperty();
 
+
+     public Long getId() {
+          return idProperty().get();
+     }
+
      public Long getAdminId() {
      return admin_idProperty().get();
      }
@@ -49,10 +54,13 @@ public class AdminBasicView {
      return familyNameProperty().get();
      }
 
+     public LongProperty idProperty() {
+          return admin_id;
+     }
+
      public void setFamilyName(String familyName) {
      this.familyNameProperty().setValue(familyName);
      }
-
 
      public LongProperty admin_idProperty() {
      return admin_id;

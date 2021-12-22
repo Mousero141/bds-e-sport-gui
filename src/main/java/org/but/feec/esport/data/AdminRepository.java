@@ -8,7 +8,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminRepository {public AdminAuthView findAdminByEmail(String email) {
+public class AdminRepository {
+    public AdminAuthView findAdminByEmail(String email)
+    {
     try (Connection connection = DataSourceConfig.getConnection();
          PreparedStatement preparedStatement = connection.prepareStatement(
                  "SELECT email, pwd" +
@@ -18,7 +20,7 @@ public class AdminRepository {public AdminAuthView findAdminByEmail(String email
         preparedStatement.setString(1, email);
         try (ResultSet resultSet = preparedStatement.executeQuery()) {
             if (resultSet.next()) {
-                return mapToPersonAuth(resultSet);
+                return mapToAdminAuth(resultSet);
             }
         }
     } catch (SQLException e) {
@@ -27,53 +29,51 @@ public class AdminRepository {public AdminAuthView findAdminByEmail(String email
     return null;
 }
 
-    public AdminDetailView findAdminDetailedView(Long personId) {
+
+
+     // JAK ULOZIT DATE TIME ?? JAVA FX StringProperty? AdminDetailView
+    public AdminDetailView findAdminDetailedView(Long adminId) {
         try (Connection connection = DataSourceConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
-                     "SELECT admin_id, nickname, given, surname, nickname, city, house_number, street" +
+                     "SELECT admin_id, nickname, given, surname, nickname" +
                              " FROM bds.person p" +
                              " LEFT JOIN bds.address a ON p.id_address = a.id_address" +
                              " WHERE p.id_person = ?")
         ) {
-            preparedStatement.setLong(1, personId);
+            preparedStatement.setLong(1, adminId);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     //return mapToAdminDetailView(resultSet);
                 }
             }
         } catch (SQLException e) {
-            throw new DataAccessException("Find person by ID with addresses failed.", e);
+            throw new DataAccessException("Find admin by ID with addresses failed.", e);
         }
         return null;
     }
 
-    /**
-     * What will happen if we do not use LEFT JOIN? What persons will be returned? Ask your self and repeat JOIN from the presentations
-     *
-     * @return list of persons
-     */
-    public List<AdminBasicView> getPersonsBasicView() {
+    public List<AdminBasicView> getAdminsBasicView() {
         try (Connection connection = DataSourceConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
-                     "SELECT id_person, email, first_name, surname, nickname, city" +
-                             " FROM bds.person p" +
-                             " LEFT JOIN bds.address a ON p.id_address = a.id_address");
+                     "SELECT a.admin_id, a.given_name, a.nickname, a.given_name, a.email" +
+                             " FROM admin a " +
+                             " LEFT JOIN match m ON a.admin_id = m.admin_id");
              ResultSet resultSet = preparedStatement.executeQuery();) {
-            List<AdminBasicView> personBasicViews = new ArrayList<>();
+            List<AdminBasicView> adminBasicViews = new ArrayList<>();
             while (resultSet.next()) {
-                personBasicViews.add(mapToPersonBasicView(resultSet));
+                adminBasicViews.add(mapToAdminBasicView(resultSet));
             }
-            return personBasicViews;
+            return adminBasicViews;
         } catch (SQLException e) {
-            throw new DataAccessException("Persons basic view could not be loaded.", e);
+            throw new DataAccessException("Admins basic view could not be loaded.", e);
         }
     }
 
-    public void createPerson(AdminCreateView adminCreateView) {
-        String insertPersonSQL = "INSERT INTO bds.person (email, first_name, nickname, pwd, surname) VALUES (?,?,?,?,?)";
+    public void createAdmin(AdminCreateView adminCreateView) {
+        String insertAdminSQL = "INSERT INTO admin (nickname, email, password, given_name, family_name) VALUES (?,?,?,?,?)";
         try (Connection connection = DataSourceConfig.getConnection();
              // would be beneficial if I will return the created entity back
-             PreparedStatement preparedStatement = connection.prepareStatement(insertPersonSQL, Statement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(insertAdminSQL, Statement.RETURN_GENERATED_KEYS)) {
             // set prepared statement variables
             preparedStatement.setString(1, adminCreateView.getEmail());
             preparedStatement.setString(2, adminCreateView.getFirstName());
@@ -84,14 +84,14 @@ public class AdminRepository {public AdminAuthView findAdminByEmail(String email
             int affectedRows = preparedStatement.executeUpdate();
 
             if (affectedRows == 0) {
-                throw new DataAccessException("Creating person failed, no rows affected.");
+                throw new DataAccessException("Creating admin failed, no rows affected.");
             }
         } catch (SQLException e) {
-            throw new DataAccessException("Creating person failed operation on the database failed.");
+            throw new DataAccessException("Creating admin failed operation on the database failed.");
         }
     }
 
-    public void editPerson(AdminEditView adminEditView) {
+    public void editAdmin(AdminEditView adminEditView) {
         String insertPersonSQL = "UPDATE admin a SET email = ?, first_name = ?, nickname = ?, surname = ? WHERE a.admin_id = ?";
         String checkIfExists = "SELECT email FROM admin a WHERE a.admin_id = ?";
         try (Connection connection = DataSourceConfig.getConnection();
@@ -106,12 +106,12 @@ public class AdminRepository {public AdminAuthView findAdminByEmail(String email
 
             try {
                 // TODO set connection autocommit to false
-                /* HERE */
+                connection.setAutoCommit(false);
                 try (PreparedStatement ps = connection.prepareStatement(checkIfExists, Statement.RETURN_GENERATED_KEYS)) {
                     ps.setLong(1, adminEditView.getId());
                     ps.execute();
                 } catch (SQLException e) {
-                    throw new DataAccessException("This person for edit do not exists.");
+                    throw new DataAccessException("This admin for edit do not exists.");
                 }
 
                 int affectedRows = preparedStatement.executeUpdate();
@@ -120,13 +120,13 @@ public class AdminRepository {public AdminAuthView findAdminByEmail(String email
                     throw new DataAccessException("Creating person failed, no rows affected.");
                 }
                 // TODO commit the transaction (both queries were performed)
-                /* HERE */
+                connection.commit();
             } catch (SQLException e) {
                 // TODO rollback the transaction if something wrong occurs
-                /* HERE */
+                connection.rollback();
             } finally {
                 // TODO set connection autocommit back to true
-                /* HERE */
+                connection.setAutoCommit(true);
             }
         } catch (SQLException e) {
             throw new DataAccessException("Creating person failed operation on the database failed.");
@@ -139,14 +139,14 @@ public class AdminRepository {public AdminAuthView findAdminByEmail(String email
      * Note: In practice reflection or other mapping frameworks can be used (e.g., MapStruct)
      * </p>
      */
-    private AdminAuthView mapToPersonAuth(ResultSet rs) throws SQLException {
+    private AdminAuthView mapToAdminAuth(ResultSet rs) throws SQLException {
         AdminAuthView person = new AdminAuthView();
         person.setEmail(rs.getString("email"));
         person.setPassword(rs.getString("pwd"));
         return person;
     }
 
-    private AdminBasicView mapToPersonBasicView(ResultSet rs) throws SQLException {
+    private AdminBasicView mapToAdminBasicView(ResultSet rs) throws SQLException {
         AdminBasicView adminBasicView = new AdminBasicView();
         adminBasicView.setAdminId(rs.getLong("admin_id"));
         adminBasicView.setEmail(rs.getString("email"));
@@ -156,16 +156,13 @@ public class AdminRepository {public AdminAuthView findAdminByEmail(String email
         return adminBasicView;
     }
 
-    /**private AdminDetailView mapToAdminDetailView(ResultSet rs) throws SQLException {
+    private AdminDetailView mapToAdminDetailView(ResultSet rs) throws SQLException {
         AdminDetailView adminDetailView = new AdminDetailView();
         adminDetailView.setId(rs.getLong("id_person"));
         adminDetailView.setEmail(rs.getString("email"));
         adminDetailView.setGivenName(rs.getString("first_name"));
         adminDetailView.setFamilyName(rs.getString("surname"));
         adminDetailView.setNickname(rs.getString("nickname"));
-        adminDetailView.setCity(rs.getString("city"));
-        adminDetailView.sethouseNumber(rs.getString("house_number"));
-        adminDetailView.setStreet(rs.getString("street"));
         return adminDetailView;
-    }*/
+    }
 }
