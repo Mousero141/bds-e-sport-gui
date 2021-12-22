@@ -1,5 +1,7 @@
 package org.but.feec.esport.controller;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import org.but.feec.esport.App;
 import org.but.feec.esport.data.AdminRepository;
 import org.but.feec.esport.exceptions.DataAccessException;
@@ -37,6 +39,8 @@ public class LoginController {
     public Label passwordLabel;
     @FXML
     private Button signInButton;
+    @FXML
+    private Button logo;
     @FXML
     private TextField usernameTextfield;
     @FXML
@@ -84,6 +88,15 @@ public class LoginController {
         authService = new AdminAuthService(adminRepository);
     }
 
+    private void initializeLogos() {
+        Image vutImage = new Image(App.class.getResourceAsStream("logos/logo.png"));
+        ImageView vutLogoImage = new ImageView(vutImage);
+        vutLogoImage.setFitHeight(85);
+        vutLogoImage.setFitWidth(150);
+        vutLogoImage.setPreserveRatio(true);
+        logo.setGraphic(vutLogoImage);
+    }
+
     public void signInActionHandler(ActionEvent event) {
         handleSignIn();
     }
@@ -115,6 +128,9 @@ public class LoginController {
 
             Stage stageOld = (Stage) signInButton.getScene().getWindow();
             stageOld.close();
+
+            stage.getIcons().add(new Image(App.class.getResourceAsStream("logos/logo.png")));
+            authConfirmDialog();
 
             authConfirmDialog();
 
