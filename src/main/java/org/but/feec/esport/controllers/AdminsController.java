@@ -28,7 +28,7 @@ public class AdminsController {
     private static final Logger logger = LoggerFactory.getLogger(AdminsController.class);
 
     @FXML
-    public Button addPersonButton;
+    public Button addAdminButton;
     @FXML
     public Button refreshButton;
     @FXML
@@ -70,7 +70,7 @@ public class AdminsController {
 
         systemAdminsTableView.getSortOrder().add(adminsId);
 
-        initializeTableViewSelection();
+        //initializeTableViewSelection();
         loadIcons();
 
         logger.info("PersonsController initialized");

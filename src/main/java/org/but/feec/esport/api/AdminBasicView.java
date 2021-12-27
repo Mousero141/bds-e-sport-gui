@@ -31,7 +31,7 @@ public class AdminBasicView {
      }
 
      public void setNickname(String nickname) {
-     this.nicknameProperty().set(nickname);
+     this.nicknameProperty().setValue(nickname);
      }
 
      public String getEmail() {

@@ -108,29 +108,32 @@ public class LoginController {
 
         try {
             boolean authenticated = authService.authenticate(username, password);
+            System.out.println(username);
+            System.out.println(password);
             if (authenticated) {
                 showPersonsView();
             } else {
                 showInvalidPaswordDialog();
             }
         } catch (ResourceNotFoundException | DataAccessException e) {
-            showInvalidPaswordDialogY();
+            showInvalidPaswordDialog();
         }
     }
 
     private void showPersonsView() {
         try {
+            System.out.println("TEEEEEEEEEEEEST FUNCKNOSTI");
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(App.class.getResource("fxml/Persons.fxml"));
+            fxmlLoader.setLocation(App.class.getResource("/org.but.feec.esport/fxml/Persons.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 1050, 600);
             Stage stage = new Stage();
-            stage.setTitle("BDS JavaFX Demo App");
+            stage.setTitle("BDS e-Sport demo App");
             stage.setScene(scene);
 
             Stage stageOld = (Stage) signInButton.getScene().getWindow();
             stageOld.close();
 
-            stage.getIcons().add(new Image(App.class.getResourceAsStream("logos/logo.png")));
+            //stage.getIcons().add(new Image(App.class.getResourceAsStream("logos/logo.png")));
             authConfirmDialog();
 
             authConfirmDialog();
@@ -150,14 +153,6 @@ public class LoginController {
         alert.showAndWait();
     }
 
-    private void showInvalidPaswordDialogY() {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Unauthenticated TAKHLE TO NEPUJDE PANACKU");
-        alert.setHeaderText("The user is not authenticated");
-        alert.setContentText("Please provide a valid username and password");//ww  w . j  a  va2s  .  co  m
-
-        alert.showAndWait();
-    }
 
 
     private void authConfirmDialog() {

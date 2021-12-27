@@ -17,7 +17,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox minHeight="625.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.but.feec.esport.controllers.">
+<VBox minHeight="625.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.but.feec.esport.controllers.AdminsController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -34,7 +34,7 @@
         </Menu>
       </menus>
     </MenuBar>
-    <SplitPane dividerPositions="0.14715048975957254, 0.7782724844167408" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <SplitPane dividerPositions="0.14715048975957254" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <items>
         <AnchorPane>
           <children>
@@ -52,28 +52,20 @@
           <content>
             <AnchorPane id="Content" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="-Infinity" prefHeight="517.0" prefWidth="592.0">
               <children>
-                <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" prefHeight="27.0" prefWidth="147.0" style="&#10;" text="Persons" textAlignment="CENTER" textFill="$x2" wrapText="false" />
-                        <TableView fx:id="systemPersonsTableView" layoutY="67.0" maxWidth="1.7976931348623157E308" minWidth="-Infinity" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" prefHeight="27.0" prefWidth="147.0" style="&#10;" text="Admins" textAlignment="CENTER" textFill="$x2" wrapText="false" />
+                        <TableView fx:id="systemAdminsTableView" layoutY="67.0" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="400.0" prefWidth="788.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-196.0">
                           <columns>
-                              <TableColumn fx:id="personsId" minWidth="75.0" prefWidth="80.00000303983688" text="id" />
-                              <TableColumn fx:id="personsEmail" minWidth="75.0" prefWidth="160.00001525878906" text="email" />
-                              <TableColumn fx:id="personsGivenName" minWidth="75.0" prefWidth="120.0" text="given name" />
-                              <TableColumn fx:id="personsFamilyName" minWidth="75.0" prefWidth="120.0" text="family name" />
-                              <TableColumn fx:id="personsCity" minWidth="75.0" prefWidth="120.0" text="city" />
-                              <TableColumn fx:id="personsNickname" minWidth="75.0" prefWidth="120.0" text="nickname" />
+                              <TableColumn fx:id="adminsId" minWidth="75.0" prefWidth="80.00000303983688" text="id" />
+                              <TableColumn fx:id="adminsEmail" minWidth="75.0" prefWidth="160.00001525878906" text="email" />
+                              <TableColumn fx:id="adminsGivenName" minWidth="75.0" prefWidth="120.0" text="given name" />
+                              <TableColumn fx:id="adminsFamilyName" minWidth="75.0" prefWidth="120.0" text="family name" />
+                              <TableColumn fx:id="adminsNickname" minWidth="75.0" prefWidth="120.0" text="nickname" />
                           </columns>
                         </TableView>
-                        <Button fx:id="addPersonButton" layoutX="24.0" layoutY="491.0" mnemonicParsing="false" onAction="#handleAddPersonButton" text="Add person" />
-                        <Button fx:id="refreshButton" layoutX="127.0" layoutY="491.0" mnemonicParsing="false" onAction="#handleRefreshButton" text="Refresh" />
               </children>
             </AnchorPane>
           </content>
         </ScrollPane>
-        <AnchorPane>
-          <children>
-            <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="My meetings" textAlignment="CENTER" textFill="$x2" wrapText="false" />
-          </children>
-        </AnchorPane>
       </items>
     </SplitPane>
     <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="NEVER">

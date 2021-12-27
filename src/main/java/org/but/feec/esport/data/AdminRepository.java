@@ -11,6 +11,7 @@ import java.util.List;
 public class AdminRepository {
     public AdminAuthView findAdminByEmail(String email)
     {
+        System.out.println(email);
     try (Connection connection = DataSourceConfig.getConnection();
          PreparedStatement preparedStatement = connection.prepareStatement(
                  "SELECT email, password" +
@@ -55,7 +56,7 @@ public class AdminRepository {
              PreparedStatement preparedStatement = connection.prepareStatement(
                      "SELECT a.admin_id, a.given_name, a.nickname, a.given_name, a.email" +
                              " FROM lol.admin a " +
-                             " LEFT JOIN match m ON a.admin_id = m.admin_id");
+                             " LEFT JOIN lol.match m ON a.admin_id = m.admin_id");
              ResultSet resultSet = preparedStatement.executeQuery();) {
             List<AdminBasicView> adminBasicViews = new ArrayList<>();
             while (resultSet.next()) {
@@ -134,7 +135,9 @@ public class AdminRepository {
     private AdminAuthView mapToAdminAuth(ResultSet rs) throws SQLException {
         AdminAuthView admin = new AdminAuthView();
         admin.setEmail(rs.getString("email"));
+        System.out.println(admin.getEmail());
         admin.setPassword(rs.getString("password"));
+        System.out.println(admin.getPassword());
         return admin;
     }
 

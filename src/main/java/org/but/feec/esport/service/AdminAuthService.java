@@ -8,6 +8,8 @@ import org.but.feec.esport.exceptions.ResourceNotFoundException;
 public class AdminAuthService {
 
     private AdminRepository adminRepository;
+    
+   
 
     public AdminAuthService(AdminRepository adminRepository) {
         this.adminRepository = adminRepository;
@@ -22,11 +24,14 @@ public class AdminAuthService {
             return false;
         }
         AdminAuthView adminAuthView = findAdminByEmail(username);
+        String test = adminAuthView.getPassword();
+        String bcryptHashString = BCrypt.withDefaults().hashToString(12, test.toCharArray());
+
         if (adminAuthView == null) {
             throw new ResourceNotFoundException("Provided username is not found.");
         }
 
-        BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), adminAuthView.getPassword());
+        BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), bcryptHashString);
         return result.verified;
     }
 }
