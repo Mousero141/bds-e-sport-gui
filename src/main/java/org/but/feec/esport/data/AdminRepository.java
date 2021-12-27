@@ -13,8 +13,8 @@ public class AdminRepository {
     {
     try (Connection connection = DataSourceConfig.getConnection();
          PreparedStatement preparedStatement = connection.prepareStatement(
-                 "SELECT email, pwd" +
-                         " FROM admin a" +
+                 "SELECT email, password" +
+                         " FROM lol.admin a" +
                          " WHERE a.email = ?")
     ) {
         preparedStatement.setString(1, email);
@@ -30,14 +30,12 @@ public class AdminRepository {
 }
 
 
-
-     // JAK ULOZIT DATE TIME ?? JAVA FX StringProperty? AdminDetailView
-    public AdminDetailView findAdminDetailedView(Long adminId) {
+ public AdminDetailView findAdminDetailedView(Long adminId) {
         try (Connection connection = DataSourceConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
                      "SELECT admin_id, nickname, given, surname, nickname" +
-                             " FROM bds.person p" +
-                             " LEFT JOIN bds.address a ON p.id_address = a.id_address" +
+                             " FROM lol.admin" +
+                             " LEFT JOIN address a ON p.id_address = a.id_address" +
                              " WHERE p.id_person = ?")
         ) {
             preparedStatement.setLong(1, adminId);
@@ -56,7 +54,7 @@ public class AdminRepository {
         try (Connection connection = DataSourceConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
                      "SELECT a.admin_id, a.given_name, a.nickname, a.given_name, a.email" +
-                             " FROM admin a " +
+                             " FROM lol.admin a " +
                              " LEFT JOIN match m ON a.admin_id = m.admin_id");
              ResultSet resultSet = preparedStatement.executeQuery();) {
             List<AdminBasicView> adminBasicViews = new ArrayList<>();
@@ -70,7 +68,7 @@ public class AdminRepository {
     }
 
     public void createAdmin(AdminCreateView adminCreateView) {
-        String insertAdminSQL = "INSERT INTO admin (nickname, email, password, given_name, family_name) VALUES (?,?,?,?,?)";
+        String insertAdminSQL = "INSERT INTO lol.admin (nickname, email, password, given_name, family_name) VALUES (?,?,?,?,?)";
         try (Connection connection = DataSourceConfig.getConnection();
              // would be beneficial if I will return the created entity back
              PreparedStatement preparedStatement = connection.prepareStatement(insertAdminSQL, Statement.RETURN_GENERATED_KEYS)) {
@@ -92,8 +90,8 @@ public class AdminRepository {
     }
 
     public void editAdmin(AdminEditView adminEditView) {
-        String insertPersonSQL = "UPDATE admin a SET email = ?, first_name = ?, nickname = ?, surname = ? WHERE a.admin_id = ?";
-        String checkIfExists = "SELECT email FROM admin a WHERE a.admin_id = ?";
+        String insertPersonSQL = "UPDATE lol.admin a SET email = ?, first_name = ?, nickname = ?, surname = ? WHERE a.admin_id = ?";
+        String checkIfExists = "SELECT email FROM lol.admin a WHERE a.admin_id = ?";
         try (Connection connection = DataSourceConfig.getConnection();
              // would be beneficial if I will return the created entity back
              PreparedStatement preparedStatement = connection.prepareStatement(insertPersonSQL, Statement.RETURN_GENERATED_KEYS)) {
@@ -105,7 +103,7 @@ public class AdminRepository {
             preparedStatement.setLong(5, adminEditView.getId());
 
             try {
-                // TODO set connection autocommit to false
+
                 connection.setAutoCommit(false);
                 try (PreparedStatement ps = connection.prepareStatement(checkIfExists, Statement.RETURN_GENERATED_KEYS)) {
                     ps.setLong(1, adminEditView.getId());
@@ -119,13 +117,11 @@ public class AdminRepository {
                 if (affectedRows == 0) {
                     throw new DataAccessException("Creating person failed, no rows affected.");
                 }
-                // TODO commit the transaction (both queries were performed)
+
                 connection.commit();
             } catch (SQLException e) {
-                // TODO rollback the transaction if something wrong occurs
                 connection.rollback();
             } finally {
-                // TODO set connection autocommit back to true
                 connection.setAutoCommit(true);
             }
         } catch (SQLException e) {
@@ -134,16 +130,12 @@ public class AdminRepository {
     }
 
 
-    /**
-     * <p>
-     * Note: In practice reflection or other mapping frameworks can be used (e.g., MapStruct)
-     * </p>
-     */
+
     private AdminAuthView mapToAdminAuth(ResultSet rs) throws SQLException {
-        AdminAuthView person = new AdminAuthView();
-        person.setEmail(rs.getString("email"));
-        person.setPassword(rs.getString("pwd"));
-        return person;
+        AdminAuthView admin = new AdminAuthView();
+        admin.setEmail(rs.getString("email"));
+        admin.setPassword(rs.getString("password"));
+        return admin;
     }
 
     private AdminBasicView mapToAdminBasicView(ResultSet rs) throws SQLException {

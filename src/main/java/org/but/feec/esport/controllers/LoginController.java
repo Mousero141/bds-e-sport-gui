@@ -114,7 +114,7 @@ public class LoginController {
                 showInvalidPaswordDialog();
             }
         } catch (ResourceNotFoundException | DataAccessException e) {
-            showInvalidPaswordDialog();
+            showInvalidPaswordDialogY();
         }
     }
 
@@ -144,6 +144,15 @@ public class LoginController {
     private void showInvalidPaswordDialog() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Unauthenticated");
+        alert.setHeaderText("The user is not authenticated");
+        alert.setContentText("Please provide a valid username and password");//ww  w . j  a  va2s  .  co  m
+
+        alert.showAndWait();
+    }
+
+    private void showInvalidPaswordDialogY() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Unauthenticated TAKHLE TO NEPUJDE PANACKU");
         alert.setHeaderText("The user is not authenticated");
         alert.setContentText("Please provide a valid username and password");//ww  w . j  a  va2s  .  co  m
 
