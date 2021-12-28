@@ -9,7 +9,8 @@ import org.but.feec.esport.data.AdminRepository;
 
 import java.util.List;
 
-public class AdminService {private AdminRepository adminRepository;
+public class AdminService {
+    private AdminRepository adminRepository;
 
     public AdminService(AdminRepository adminRepository) {
         this.adminRepository = adminRepository;

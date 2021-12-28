@@ -11,7 +11,6 @@ import java.util.List;
 public class AdminRepository {
     public AdminAuthView findAdminByEmail(String email)
     {
-        System.out.println(email);
     try (Connection connection = DataSourceConfig.getConnection();
          PreparedStatement preparedStatement = connection.prepareStatement(
                  "SELECT email, password" +
@@ -66,6 +65,18 @@ public class AdminRepository {
         }
     }
 
+    public void deleteAdmin(AdminBasicView adminBasicView) throws SQLException {
+        String delete = "DELETE FROM lol.admin WHERE admin_id = ?";
+        try (Connection connection = DataSourceConfig.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(delete, Statement.RETURN_GENERATED_KEYS)) {
+            preparedStatement.setLong(1, adminBasicView.getId());
+            preparedStatement.execute();
+        }
+        catch (SQLException e) {
+            throw new DataAccessException("Deleting admin failed.");
+        }
+    }
+
     public void createAdmin(AdminCreateView adminCreateView) {
         String insertAdminSQL = "INSERT INTO lol.admin (nickname, email, password, given_name, family_name, salary) VALUES (?,?,?,?,?,?)";
         try (Connection connection = DataSourceConfig.getConnection();
@@ -90,22 +101,20 @@ public class AdminRepository {
     }
 
     public void editAdmin(AdminEditView adminEditView) {
-        String insertPersonSQL = "UPDATE lol.admin a SET a.email = ?, a.given_name = ?, a.nickname = ?, a.family_name = ?, a.salary = ? WHERE a.admin_id = ?";
+        String insertPersonSQL = "UPDATE lol.admin a SET email = ?, given_name = ?, nickname = ?, family_name = ?, salary = ? WHERE admin_id = ?";
         String checkIfExists = "SELECT email FROM lol.admin a WHERE a.admin_id = ?";
+        System.out.println(adminEditView.getNickname());
+        System.out.println(adminEditView.getEmail());
         try (Connection connection = DataSourceConfig.getConnection();
-             // would be beneficial if I will return the created entity back
              PreparedStatement preparedStatement = connection.prepareStatement(insertPersonSQL, Statement.RETURN_GENERATED_KEYS)) {
-            // set prepared statement variables
             preparedStatement.setString(1, adminEditView.getEmail());
             preparedStatement.setString(2, adminEditView.getGiven_name());
             preparedStatement.setString(3, adminEditView.getNickname());
             preparedStatement.setString(4, adminEditView.getFamily_name());
-            preparedStatement.setLong(5, adminEditView.getId());
-            preparedStatement.setLong(6, adminEditView.getSalary());
-
+            preparedStatement.setLong(5, adminEditView.getSalary());
+            preparedStatement.setLong(6, adminEditView.getId());
 
             try {
-
                 connection.setAutoCommit(false);
                 try (PreparedStatement ps = connection.prepareStatement(checkIfExists, Statement.RETURN_GENERATED_KEYS)) {
                     ps.setLong(1, adminEditView.getId());
@@ -119,7 +128,6 @@ public class AdminRepository {
                 if (affectedRows == 0) {
                     throw new DataAccessException("Creating admin failed, no rows affected.");
                 }
-
                 connection.commit();
             } catch (SQLException e) {
                 connection.rollback();

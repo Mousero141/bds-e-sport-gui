@@ -1,8 +1,11 @@
 package org.but.feec.esport.controllers;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,8 +14,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import jdk.jshell.spi.ExecutionControlProvider;
 import org.but.feec.esport.api.AdminBasicView;
+import org.but.feec.esport.api.AdminCreateView;
 import org.but.feec.esport.api.AdminDetailView;
+import org.but.feec.esport.config.DataSourceConfig;
 import org.but.feec.esport.data.AdminRepository;
 import org.but.feec.esport.service.AdminService;
 import org.but.feec.esport.App;
@@ -21,7 +28,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class AdminsController {
 
@@ -79,6 +90,7 @@ public class AdminsController {
     private void initializeTableViewSelection() {
         MenuItem edit = new MenuItem("Edit admin");
         MenuItem detailedView = new MenuItem("Detailed admin view");
+        MenuItem delete = new MenuItem("Delete admin");
         edit.setOnAction((ActionEvent event) -> {
             AdminBasicView adminView = systemAdminsTableView.getSelectionModel().getSelectedItem();
             try {
@@ -128,11 +140,22 @@ public class AdminsController {
                 ExceptionHandler.handleException(ex);
             }
         });
+        delete.setOnAction((ActionEvent event) -> {
+            AdminBasicView adminView = systemAdminsTableView.getSelectionModel().getSelectedItem();
+            try {
+                adminRepository.deleteAdmin(adminView);
+            } catch (SQLException ex) {
+                ExceptionHandler.handleException(ex);
+            }
+            adminDeletedConfirmationDialog();
+        });
+
 
 
         ContextMenu menu = new ContextMenu();
         menu.getItems().add(edit);
         menu.getItems().addAll(detailedView);
+        menu.getItems().addAll(delete);
         systemAdminsTableView.setContextMenu(menu);
     }
 
@@ -178,5 +201,22 @@ public class AdminsController {
         systemAdminsTableView.setItems(observableAdminsList);
         systemAdminsTableView.refresh();
         systemAdminsTableView.sort();
+    }
+
+    private void adminDeletedConfirmationDialog() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Admin Deleted Confirmation");
+        alert.setHeaderText("Your admin was successfully deleted.");
+
+        Timeline idlestage = new Timeline(new KeyFrame(Duration.seconds(3), new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                alert.setResult(ButtonType.CANCEL);
+                alert.hide();
+            }
+        }));
+        idlestage.setCycleCount(1);
+        idlestage.play();
+        Optional<ButtonType> result = alert.showAndWait();
     }
 }

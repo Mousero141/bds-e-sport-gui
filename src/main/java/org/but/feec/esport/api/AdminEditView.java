@@ -59,11 +59,12 @@ public class AdminEditView {
 
     @Override
     public String toString() {
-        return "PersonEditView{" +
+        return "AdminEditView{" +
                 "email='" + email + '\'' +
                 ", given_name='" + given_name + '\'' +
                 ", nickname='" + nickname + '\'' +
                 ", family_name='" + family_name + '\'' +
+                ", salary='" + salary + '\'' +
                 '}';
     }
 }
