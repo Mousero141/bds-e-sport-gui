@@ -63,6 +63,6 @@
             </Label>
             </children>
         </GridPane>
-        <Button fx:id="editAdminButton" layoutX="501.0" layoutY="349.0" mnemonicParsing="false" onAction="#handleEditPersonButton" text="edit admin" />
+        <Button fx:id="editAdminButton" layoutX="501.0" layoutY="349.0" mnemonicParsing="false" onAction="#handleEditAdminButton" text="edit admin" />
     </children>
 </AnchorPane>

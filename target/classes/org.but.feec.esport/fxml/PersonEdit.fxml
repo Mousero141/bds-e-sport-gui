@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <GridPane layoutX="22.0" layoutY="22.0" prefHeight="311.0" prefWidth="549.0">
             <columnConstraints>
@@ -55,9 +55,14 @@
                 <TextField fx:id="givenNameTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <TextField fx:id="familyNameTextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                 <TextField fx:id="nicknameTextField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                <TextField fx:id="salaryTextField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                <TextField fx:id="salaryTextField" prefWidth="449.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label layoutX="10.0" layoutY="259.0" text="salary" GridPane.rowIndex="5">
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
+            </Label>
             </children>
         </GridPane>
-        <Button fx:id="editAdminButton" layoutX="501.0" layoutY="349.0" mnemonicParsing="false" onAction="#handleEditPersonButton" text="edit admin" />
+        <Button fx:id="editAdminButton" layoutX="501.0" layoutY="349.0" mnemonicParsing="false" onAction="#handleEditAdminButton" text="edit admin" />
     </children>
 </AnchorPane>

@@ -78,6 +78,7 @@ public class AdminsEditController {
      */
     private void loadPersonsData() {
         Stage stage = this.stage;
+
         if (stage.getUserData() instanceof AdminBasicView) {
             AdminBasicView adminBasicView = (AdminBasicView) stage.getUserData();
             idTextField.setText(String.valueOf(adminBasicView.getId()));
@@ -90,7 +91,7 @@ public class AdminsEditController {
     }
 
     @FXML
-    public void handleEditPersonButton(ActionEvent event) {
+    public void handleEditAdminButton(ActionEvent event) {
         Long id = Long.valueOf(idTextField.getText());
         String email = emailTextField.getText();
         String given_name = givenNameTextField.getText();
@@ -105,16 +106,17 @@ public class AdminsEditController {
         adminEditView.setFamily_name(family_name);
         adminEditView.setNickname(nickname);
         adminEditView.setSalary(salary);
+        System.out.println(salary);
 
         admineService.editAdmin(adminEditView);
 
-        personEditedConfirmationDialog();
+        adminEditedConfirmationDialog();
     }
 
-    private void personEditedConfirmationDialog() {
+    private void adminEditedConfirmationDialog() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Person Edited Confirmation");
-        alert.setHeaderText("Your person was successfully edited.");
+        alert.setTitle("Admin Edited Confirmation");
+        alert.setHeaderText("Your admin was successfully edited.");
 
         Timeline idlestage = new Timeline(new KeyFrame(Duration.seconds(3), new EventHandler<ActionEvent>() {
             @Override

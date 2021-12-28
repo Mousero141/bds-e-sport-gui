@@ -4,11 +4,13 @@ org\but\feec\esport\controllers\AdminsEditController$1.class
 org\but\feec\esport\exceptions\ResourceNotFoundException.class
 org\but\feec\esport\api\AdminAuthView.class
 org\but\feec\esport\config\DataSourceConfig.class
+org\but\feec\esport\controllers\AdminCreateController.class
 org\but\feec\esport\api\AdminDetailView.class
 org\but\feec\esport\Main.class
 org\but\feec\esport\service\AdminAuthService.class
 org\but\feec\esport\controllers\AdminsEditController.class
 org\but\feec\esport\controllers\AdminsDetailViewController.class
+org\but\feec\esport\controllers\AdminCreateController$1.class
 org\but\feec\esport\controllers\LoginController$1.class
 org\but\feec\esport\App.class
 org\but\feec\esport\api\AdminBasicView.class

@@ -155,7 +155,7 @@ public class AdminsController {
     public void handleAddPersonButton(ActionEvent actionEvent) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(App.class.getResource("fxml/PersonsCreate.fxml"));
+            fxmlLoader.setLocation(App.class.getResource("/org.but.feec.esport/fxml/PersonsCreate.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 600, 500);
             Stage stage = new Stage();
             stage.setTitle("BDS JavaFX Create Admin");

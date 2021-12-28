@@ -122,7 +122,6 @@ public class LoginController {
 
     private void showPersonsView() {
         try {
-            System.out.println("TEEEEEEEEEEEEST FUNCKNOSTI");
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(App.class.getResource("/org.but.feec.esport/fxml/Persons.fxml"));
             //fxmlLoader.setLocation(getClass().getClassLoader().getResource("fxml/Persons.fxml"));

@@ -7,6 +7,7 @@ public class AdminCreateView {
     private String given_name;
     private String nickname;
     private String family_name;
+    private Long salary;
     private char[] pwd;
 
     public String getEmail() {
@@ -15,6 +16,14 @@ public class AdminCreateView {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Long getSalary(){
+        return salary;
+    }
+
+    public void setSalary(Long salary){
+        this.salary = salary;
     }
 
     public String getGiven_name() {
@@ -55,6 +64,7 @@ public class AdminCreateView {
                 "email='" + email + '\'' +
                 ", given_name='" + given_name + '\'' +
                 ", nickname='" + nickname + '\'' +
+                ", salary='" + salary + '\'' +
                 ", family_name='" + family_name + '\'' +
                 ", pwd=" + Arrays.toString(pwd) +
                 '}';

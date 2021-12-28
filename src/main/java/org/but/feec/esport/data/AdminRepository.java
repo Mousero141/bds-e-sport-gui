@@ -55,7 +55,7 @@ public class AdminRepository {
              PreparedStatement preparedStatement = connection.prepareStatement(
                      "SELECT a.admin_id, a.given_name, a.nickname, a.family_name, a.email, a.salary" +
                              " FROM lol.admin a");
-             ResultSet resultSet = preparedStatement.executeQuery();) {
+             ResultSet resultSet = preparedStatement.executeQuery()) {
             List<AdminBasicView> adminBasicViews = new ArrayList<>();
             while (resultSet.next()) {
                 adminBasicViews.add(mapToAdminBasicView(resultSet));
@@ -72,11 +72,12 @@ public class AdminRepository {
              // would be beneficial if I will return the created entity back
              PreparedStatement preparedStatement = connection.prepareStatement(insertAdminSQL, Statement.RETURN_GENERATED_KEYS)) {
             // set prepared statement variables
-            preparedStatement.setString(1, adminCreateView.getEmail());
-            preparedStatement.setString(2, adminCreateView.getGiven_name());
-            preparedStatement.setString(3, adminCreateView.getNickname());
-            preparedStatement.setString(4, String.valueOf(adminCreateView.getPwd()));
+            preparedStatement.setString(1, adminCreateView.getNickname());
+            preparedStatement.setString(2, adminCreateView.getEmail());
+            preparedStatement.setString(3, String.valueOf(adminCreateView.getPwd()));
+            preparedStatement.setString(4, adminCreateView.getGiven_name());
             preparedStatement.setString(5, adminCreateView.getFamily_name());
+            preparedStatement.setLong(6, adminCreateView.getSalary());
 
             int affectedRows = preparedStatement.executeUpdate();
 
@@ -89,7 +90,7 @@ public class AdminRepository {
     }
 
     public void editAdmin(AdminEditView adminEditView) {
-        String insertPersonSQL = "UPDATE lol.admin a SET email = ?, given_name = ?, nickname = ?, family_name = ?, salary = ? WHERE a.admin_id = ?";
+        String insertPersonSQL = "UPDATE lol.admin a SET a.email = ?, a.given_name = ?, a.nickname = ?, a.family_name = ?, a.salary = ? WHERE a.admin_id = ?";
         String checkIfExists = "SELECT email FROM lol.admin a WHERE a.admin_id = ?";
         try (Connection connection = DataSourceConfig.getConnection();
              // would be beneficial if I will return the created entity back
@@ -100,6 +101,8 @@ public class AdminRepository {
             preparedStatement.setString(3, adminEditView.getNickname());
             preparedStatement.setString(4, adminEditView.getFamily_name());
             preparedStatement.setLong(5, adminEditView.getId());
+            preparedStatement.setLong(6, adminEditView.getSalary());
+
 
             try {
 
@@ -114,7 +117,7 @@ public class AdminRepository {
                 int affectedRows = preparedStatement.executeUpdate();
 
                 if (affectedRows == 0) {
-                    throw new DataAccessException("Creating person failed, no rows affected.");
+                    throw new DataAccessException("Creating admin failed, no rows affected.");
                 }
 
                 connection.commit();
@@ -124,7 +127,7 @@ public class AdminRepository {
                 connection.setAutoCommit(true);
             }
         } catch (SQLException e) {
-            throw new DataAccessException("Creating person failed operation on the database failed.");
+            throw new DataAccessException("Creating admin failed operation on the database failed.");
         }
     }
 
@@ -146,6 +149,7 @@ public class AdminRepository {
         adminBasicView.setGivenName(rs.getString("given_name"));
         adminBasicView.setFamilyName(rs.getString("family_name"));
         adminBasicView.setNickname(rs.getString("nickname"));
+        adminBasicView.setSalary(rs.getLong("salary"));
         return adminBasicView;
     }
 
