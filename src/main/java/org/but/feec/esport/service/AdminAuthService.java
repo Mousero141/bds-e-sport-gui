@@ -24,14 +24,14 @@ public class AdminAuthService {
             return false;
         }
         AdminAuthView adminAuthView = findAdminByEmail(username);
-        String test = adminAuthView.getPassword();
-        String bcryptHashString = BCrypt.withDefaults().hashToString(12, test.toCharArray());
+        //String test = adminAuthView.getPassword();
+        //String bcryptHashString = BCrypt.withDefaults().hashToString(12, test.toCharArray());
 
         if (adminAuthView == null) {
             throw new ResourceNotFoundException("Provided username is not found.");
         }
 
-        BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), bcryptHashString);
+        BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), adminAuthView.getPassword());
         return result.verified;
     }
 }

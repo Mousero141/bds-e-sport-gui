@@ -70,22 +70,22 @@ public class AdminsController {
 
         systemAdminsTableView.getSortOrder().add(adminsId);
 
-        //initializeTableViewSelection();
+        initializeTableViewSelection();
         loadIcons();
 
         logger.info("PersonsController initialized");
     }
 
     private void initializeTableViewSelection() {
-        MenuItem edit = new MenuItem("Edit person");
-        MenuItem detailedView = new MenuItem("Detailed person view");
+        MenuItem edit = new MenuItem("Edit admin");
+        MenuItem detailedView = new MenuItem("Detailed admin view");
         edit.setOnAction((ActionEvent event) -> {
-            AdminBasicView personView = systemAdminsTableView.getSelectionModel().getSelectedItem();
+            AdminBasicView adminView = systemAdminsTableView.getSelectionModel().getSelectedItem();
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(App.class.getResource("fxml/PersonEdit.fxml"));
                 Stage stage = new Stage();
-                stage.setUserData(personView);
+                stage.setUserData(adminView);
                 stage.setTitle("BDS JavaFX Edit Person");
 
                 AdminsEditController controller = new AdminsEditController();
@@ -103,17 +103,17 @@ public class AdminsController {
         });
 
         detailedView.setOnAction((ActionEvent event) -> {
-            AdminBasicView personView = systemAdminsTableView.getSelectionModel().getSelectedItem();
+            AdminBasicView adminView = systemAdminsTableView.getSelectionModel().getSelectedItem();
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(App.class.getResource("fxml/PersonsDetailView.fxml"));
                 Stage stage = new Stage();
 
-                Long adminId = personView.getId();
+                Long adminId = adminView.getId();
                 AdminDetailView adminDetailView = adminService.getAdminDetailView(adminId);
 
                 stage.setUserData(adminDetailView);
-                stage.setTitle("BDS JavaFX Persons Detailed View");
+                stage.setTitle("BDS JavaFX Admins Detailed View");
 
                 AdminsDetailViewController controller = new AdminsDetailViewController();
                 controller.setStage(stage);
@@ -137,8 +137,8 @@ public class AdminsController {
     }
 
     private ObservableList<AdminBasicView> initializeAdminsData() {
-        List<AdminBasicView> persons = adminService.getAdminsBasicView();
-        return FXCollections.observableArrayList(persons);
+        List<AdminBasicView> admins = adminService.getAdminsBasicView();
+        return FXCollections.observableArrayList(admins);
     }
 
     private void loadIcons() {
@@ -158,7 +158,7 @@ public class AdminsController {
             fxmlLoader.setLocation(App.class.getResource("fxml/PersonsCreate.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 600, 500);
             Stage stage = new Stage();
-            stage.setTitle("BDS JavaFX Create Person");
+            stage.setTitle("BDS JavaFX Create Admin");
             stage.setScene(scene);
 
 //            Stage stageOld = (Stage) signInButton.getScene().getWindow();

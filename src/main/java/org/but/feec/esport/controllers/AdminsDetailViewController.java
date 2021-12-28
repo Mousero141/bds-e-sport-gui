@@ -55,18 +55,18 @@ public class AdminsDetailViewController {
 
         loadPersonsData();
 
-        logger.info("PersonsDetailViewController initialized");
+        logger.info("AdminsDetailViewController initialized");
     }
 
     private void loadPersonsData() {
         Stage stage = this.stage;
         if (stage.getUserData() instanceof AdminDetailView) {
-            AdminDetailView personBasicView = (AdminDetailView) stage.getUserData();
-            idTextField.setText(String.valueOf(personBasicView.getId()));
-            emailTextField.setText(personBasicView.getEmail());
-            givenNameTextField.setText(personBasicView.getGivenName());
-            familyNameTextField.setText(personBasicView.getFamilyName());
-            nicknameTextField.setText(personBasicView.getNickname());
+            AdminDetailView adminBasicView = (AdminDetailView) stage.getUserData();
+            idTextField.setText(String.valueOf(adminBasicView.getId()));
+            emailTextField.setText(adminBasicView.getEmail());
+            givenNameTextField.setText(adminBasicView.getGivenName());
+            familyNameTextField.setText(adminBasicView.getFamilyName());
+            nicknameTextField.setText(adminBasicView.getNickname());
         }
     }
 

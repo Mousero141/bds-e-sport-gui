@@ -18,12 +18,8 @@ public class AdminBasicView {
           return idProperty().get();
      }
 
-     public Long getAdminId() {
-     return admin_idProperty().get();
-     }
-
      public void setAdminId(Long id) {
-     this.admin_idProperty().setValue(id);
+     this.idProperty().setValue(id);
      }
 
      public String getNickname() {
@@ -60,10 +56,6 @@ public class AdminBasicView {
 
      public void setFamilyName(String familyName) {
      this.familyNameProperty().setValue(familyName);
-     }
-
-     public LongProperty admin_idProperty() {
-     return admin_id;
      }
 
      public StringProperty nicknameProperty() {
