@@ -65,6 +65,22 @@ public class AdminRepository {
         }
     }
 
+    public List<AdminBasicView> getDetailedView() {
+        try (Connection connection = DataSourceConfig.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "SELECT a.admin_id, a.given_name, a.nickname, a.family_name, a.email, a.salary" +
+                             " FROM lol.admin a");
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+            List<AdminBasicView> adminBasicViews = new ArrayList<>();
+            while (resultSet.next()) {
+                adminBasicViews.add(mapToAdminBasicView(resultSet));
+            }
+            return adminBasicViews;
+        } catch (SQLException e) {
+            throw new DataAccessException("Admins basic view could not be loaded.", e);
+        }
+    }
+
     public void deleteAdmin(AdminBasicView adminBasicView) throws SQLException {
         String delete = "DELETE FROM lol.admin WHERE admin_id = ?";
         try (Connection connection = DataSourceConfig.getConnection();
