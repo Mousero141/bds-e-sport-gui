@@ -59,7 +59,7 @@
                         </TableView>
                         <Button fx:id="addAdminButton" layoutX="24.0" layoutY="491.0" mnemonicParsing="false" onAction="#handleAddPersonButton" text="Add admin" />
                         <Button fx:id="refreshButton" layoutX="127.0" layoutY="491.0" mnemonicParsing="false" onAction="#handleRefreshButton" text="Refresh" />
-                        <Button fx:id="addAdminButton2" layoutX="217.0" layoutY="491.0" mnemonicParsing="false" onAction="#handleAddPersonButton" text="Detailed view" />
+                        <Button fx:id= "detailedViewButton" layoutX="217.0" layoutY="491.0" mnemonicParsing="false" onAction="#handleShowDetailedView" text="Detailed view" />
               </children>
             </AnchorPane>
           </content>

@@ -65,19 +65,19 @@ public class AdminRepository {
         }
     }
 
-    public List<AdminBasicView> getDetailedView() {
+    public List<AdminDetailedView> getDetailedView( ) {
         try (Connection connection = DataSourceConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
-                     "SELECT a.admin_id, a.given_name, a.nickname, a.family_name, a.email, a.salary" +
-                             " FROM lol.admin a");
+                     "SELECT a.admin_id, a.given_name, a.nickname, a.family_name, a.email, a.salary, m.time_of_match" +
+                             " FROM lol.admin a JOIN lol.match m ON a.admin_id = m.admin_id");
              ResultSet resultSet = preparedStatement.executeQuery()) {
-            List<AdminBasicView> adminBasicViews = new ArrayList<>();
+            List<AdminDetailedView> adminDetailedViews = new ArrayList<>();
             while (resultSet.next()) {
-                adminBasicViews.add(mapToAdminBasicView(resultSet));
+                adminDetailedViews.add(mapToAdminDetailedView(resultSet));
             }
-            return adminBasicViews;
+            return adminDetailedViews;
         } catch (SQLException e) {
-            throw new DataAccessException("Admins basic view could not be loaded.", e);
+            throw new DataAccessException("Admins detailed view could not be loaded.", e);
         }
     }
 
@@ -186,5 +186,18 @@ public class AdminRepository {
         adminDetailView.setNickname(rs.getString("nickname"));
         adminDetailView.setSalary(rs.getLong("salary"));
         return adminDetailView;
+    }
+
+    private AdminDetailedView mapToAdminDetailedView(ResultSet rs) throws SQLException {
+        AdminDetailedView adminDetailedView = new AdminDetailedView();
+        adminDetailedView.setId(rs.getLong("admin_id"));
+        adminDetailedView.setEmail(rs.getString("email"));
+        adminDetailedView.setGivenName(rs.getString("given_name"));
+        adminDetailedView.setFamily_name(rs.getString("family_name"));
+        adminDetailedView.setNickname(rs.getString("nickname"));
+        adminDetailedView.setSalary(rs.getLong("salary"));
+        adminDetailedView.setMatch_time(rs.getTimestamp("time_of_match"));
+        System.out.println(adminDetailedView.getMatch_time());
+        return adminDetailedView;
     }
 }

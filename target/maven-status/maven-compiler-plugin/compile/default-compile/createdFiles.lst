@@ -18,6 +18,7 @@ org\but\feec\esport\api\AdminBasicView.class
 org\but\feec\esport\controllers\AdminsController.class
 org\but\feec\esport\data\AdminRepository.class
 org\but\feec\esport\exceptions\DataAccessException.class
+org\but\feec\esport\api\AdminDetailedView.class
 org\but\feec\esport\controllers\LoginController.class
 org\but\feec\esport\exceptions\ExceptionHandler.class
 org\but\feec\esport\service\AdminService.class

@@ -15,21 +15,15 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import jdk.jshell.spi.ExecutionControlProvider;
 import org.but.feec.esport.api.AdminBasicView;
-import org.but.feec.esport.api.AdminCreateView;
 import org.but.feec.esport.api.AdminDetailView;
-import org.but.feec.esport.config.DataSourceConfig;
 import org.but.feec.esport.data.AdminRepository;
 import org.but.feec.esport.service.AdminService;
 import org.but.feec.esport.App;
 import org.but.feec.esport.exceptions.ExceptionHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
@@ -43,6 +37,8 @@ public class AdminsController {
     @FXML
     public Button refreshButton;
     @FXML
+    public Button detailedViewButton;
+    @FXML
     private TableColumn<AdminBasicView, Long> adminsId;
     @FXML
     private TableColumn<AdminBasicView, String> adminsEmail;
@@ -54,6 +50,7 @@ public class AdminsController {
     private TableColumn<AdminBasicView, String> adminsNickname;
     @FXML
     private TableView<AdminBasicView> systemAdminsTableView;
+
 //    @FXML
 //    public MenuItem exitMenuItem;
 
@@ -181,7 +178,7 @@ public class AdminsController {
             fxmlLoader.setLocation(App.class.getResource("/org.but.feec.esport/fxml/PersonsCreate.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 600, 500);
             Stage stage = new Stage();
-            stage.setTitle("BDS JavaFX Create Admin");
+            stage.setTitle("BDS eSport Create Admin");
             stage.setScene(scene);
 
 //            Stage stageOld = (Stage) signInButton.getScene().getWindow();
@@ -190,6 +187,21 @@ public class AdminsController {
 //            stage.getIcons().add(new Image(App.class.getResourceAsStream("logos/vut.jpg")));
 //            authConfirmDialog();
 
+            stage.show();
+        } catch (IOException ex) {
+            ExceptionHandler.handleException(ex);
+        }
+    }
+
+    public void handleShowDetailedView(ActionEvent actionEvent) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(App.class.getResource("/org.but.feec.esport/fxml/DetailedView.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 600, 500);
+            Stage stage = new Stage();
+            stage.setTitle("BDS eSport detailedView");
+            stage.setScene(scene);
+            adminRepository.getDetailedView();
             stage.show();
         } catch (IOException ex) {
             ExceptionHandler.handleException(ex);

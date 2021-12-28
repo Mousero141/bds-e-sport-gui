@@ -1,10 +1,7 @@
 package org.but.feec.esport.service;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
-import org.but.feec.esport.api.AdminBasicView;
-import org.but.feec.esport.api.AdminCreateView;
-import org.but.feec.esport.api.AdminDetailView;
-import org.but.feec.esport.api.AdminEditView;
+import org.but.feec.esport.api.*;
 import org.but.feec.esport.data.AdminRepository;
 
 import java.util.List;
