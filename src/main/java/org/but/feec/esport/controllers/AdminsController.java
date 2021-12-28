@@ -83,10 +83,10 @@ public class AdminsController {
             AdminBasicView adminView = systemAdminsTableView.getSelectionModel().getSelectedItem();
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(App.class.getResource("fxml/PersonEdit.fxml"));
+                fxmlLoader.setLocation(App.class.getResource("/org.but.feec.esport/fxml/PersonEdit.fxml"));
                 Stage stage = new Stage();
                 stage.setUserData(adminView);
-                stage.setTitle("BDS JavaFX Edit Person");
+                stage.setTitle("BDS eSport Edit Admin");
 
                 AdminsEditController controller = new AdminsEditController();
                 controller.setStage(stage);
@@ -106,7 +106,7 @@ public class AdminsController {
             AdminBasicView adminView = systemAdminsTableView.getSelectionModel().getSelectedItem();
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(App.class.getResource("fxml/PersonsDetailView.fxml"));
+                fxmlLoader.setLocation(App.class.getResource("/org.but.feec.esport/fxml/PersonsDetailView.fxml"));
                 Stage stage = new Stage();
 
                 Long adminId = adminView.getId();
@@ -142,7 +142,7 @@ public class AdminsController {
     }
 
     private void loadIcons() {
-        Image vutLogoImage = new Image(App.class.getResourceAsStream("logos/vut-logo-eng.png"));
+        Image vutLogoImage = new Image(App.class.getResourceAsStream("/org.but.feec.esport/logos/Riot_logo.png"));
         ImageView vutLogo = new ImageView(vutLogoImage);
         vutLogo.setFitWidth(150);
         vutLogo.setFitHeight(50);

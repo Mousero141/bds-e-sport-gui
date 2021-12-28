@@ -27,13 +27,8 @@ public class AdminsDetailViewController {
     private TextField nicknameTextField;
 
     @FXML
-    private TextField cityTextField;
+    private TextField salaryTextField;
 
-    @FXML
-    private TextField houseNumberTextField;
-
-    @FXML
-    private TextField streetTextField;
 
     // used to reference the stage and to get passed data through it
     public Stage stage;
@@ -49,9 +44,8 @@ public class AdminsDetailViewController {
         givenNameTextField.setEditable(false);
         familyNameTextField.setEditable(false);
         nicknameTextField.setEditable(false);
-        cityTextField.setEditable(false);
-        houseNumberTextField.setEditable(false);
-        streetTextField.setEditable(false);
+        nicknameTextField.setEditable(false);
+        salaryTextField.setEditable(false);
 
         loadPersonsData();
 
@@ -67,6 +61,7 @@ public class AdminsDetailViewController {
             givenNameTextField.setText(adminBasicView.getGivenName());
             familyNameTextField.setText(adminBasicView.getFamilyName());
             nicknameTextField.setText(adminBasicView.getNickname());
+            salaryTextField.setText(String.valueOf(adminBasicView.getSalary()));
         }
     }
 

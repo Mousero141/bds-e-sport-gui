@@ -28,7 +28,7 @@ public class AdminsEditController {
     private static final Logger logger = LoggerFactory.getLogger(AdminsEditController.class);
 
     @FXML
-    public Button editPersonButton;
+    public Button editAdminButton;
     @FXML
     public TextField idTextField;
     @FXML
@@ -39,6 +39,8 @@ public class AdminsEditController {
     private TextField familyNameTextField;
     @FXML
     private TextField nicknameTextField;
+    @FXML
+    private TextField salaryTextField;
 
     private AdminService admineService;
     private AdminRepository adminRepository;
@@ -59,11 +61,12 @@ public class AdminsEditController {
         validation.registerValidator(idTextField, Validator.createEmptyValidator("The id must not be empty."));
         idTextField.setEditable(false);
         validation.registerValidator(emailTextField, Validator.createEmptyValidator("The email must not be empty."));
-        validation.registerValidator(givenNameTextField, Validator.createEmptyValidator("The first name must not be empty."));
-        validation.registerValidator(familyNameTextField, Validator.createEmptyValidator("The last name must not be empty."));
+        validation.registerValidator(givenNameTextField, Validator.createEmptyValidator("The given name must not be empty."));
+        validation.registerValidator(familyNameTextField, Validator.createEmptyValidator("The family name must not be empty."));
         validation.registerValidator(nicknameTextField, Validator.createEmptyValidator("The nickname must not be empty."));
+        validation.registerValidator(salaryTextField, Validator.createEmptyValidator("The salary must not be empty."));
 
-        editPersonButton.disableProperty().bind(validation.invalidProperty());
+        editAdminButton.disableProperty().bind(validation.invalidProperty());
 
         loadPersonsData();
 
@@ -82,6 +85,7 @@ public class AdminsEditController {
             givenNameTextField.setText(adminBasicView.getGivenName());
             familyNameTextField.setText(adminBasicView.getFamilyName());
             nicknameTextField.setText(adminBasicView.getNickname());
+            salaryTextField.setText(String.valueOf(adminBasicView.getSalary()));
         }
     }
 
@@ -89,16 +93,18 @@ public class AdminsEditController {
     public void handleEditPersonButton(ActionEvent event) {
         Long id = Long.valueOf(idTextField.getText());
         String email = emailTextField.getText();
-        String firstName = givenNameTextField.getText();
-        String lastName = familyNameTextField.getText();
+        String given_name = givenNameTextField.getText();
+        String family_name = familyNameTextField.getText();
         String nickname = nicknameTextField.getText();
+        Long salary = Long.valueOf(salaryTextField.getText());
 
         AdminEditView adminEditView = new AdminEditView();
         adminEditView.setId(id);
         adminEditView.setEmail(email);
-        adminEditView.setGivenName(firstName);
-        adminEditView.setSurname(lastName);
+        adminEditView.setGivenName(given_name);
+        adminEditView.setFamily_name(family_name);
         adminEditView.setNickname(nickname);
+        adminEditView.setSalary(salary);
 
         admineService.editAdmin(adminEditView);
 

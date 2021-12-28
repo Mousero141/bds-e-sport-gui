@@ -23,7 +23,7 @@ public class AdminService {private AdminRepository adminRepository;
         return adminRepository.getAdminsBasicView();
     }
 
-    public void createPerson(AdminCreateView adminCreateView) {
+    public void createAdmin(AdminCreateView adminCreateView) {
         char[] originalPassword = adminCreateView.getPwd();
         char[] hashedPassword = hashPassword(originalPassword);
         adminCreateView.setPwd(hashedPassword);

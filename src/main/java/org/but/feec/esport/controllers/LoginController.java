@@ -124,7 +124,7 @@ public class LoginController {
         try {
             System.out.println("TEEEEEEEEEEEEST FUNCKNOSTI");
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(App.class.getResource("/org.but.feec.esport/Persons.fxml"));
+            fxmlLoader.setLocation(App.class.getResource("/org.but.feec.esport/fxml/Persons.fxml"));
             //fxmlLoader.setLocation(getClass().getClassLoader().getResource("fxml/Persons.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 1050, 600);
             Stage stage = new Stage();

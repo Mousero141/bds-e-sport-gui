@@ -12,6 +12,7 @@ public class AdminDetailView {
     private StringProperty givenName = new SimpleStringProperty();
     private StringProperty familyName = new SimpleStringProperty();
     private StringProperty nickname = new SimpleStringProperty();
+    private LongProperty salary = new SimpleLongProperty();
 
 
     public Long getId() {
@@ -54,6 +55,14 @@ public class AdminDetailView {
         this.nicknameProperty().set(nickname);
     }
 
+    public Long getSalary(){
+        return salaryProperty().get();
+    }
+
+    public void setSalary(Long salary){
+        this.salaryProperty().setValue(salary);
+    }
+
 
     public LongProperty idProperty() {
         return id;
@@ -75,4 +84,7 @@ public class AdminDetailView {
         return nickname;
     }
 
+    public LongProperty salaryProperty(){
+        return salary;
+    }
 }

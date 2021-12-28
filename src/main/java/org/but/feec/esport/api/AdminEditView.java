@@ -3,9 +3,19 @@ package org.but.feec.esport.api;
 public class AdminEditView {
     private Long id;
     private String email;
-    private String firstName;
+    private String given_name;
     private String nickname;
-    private String surname;
+    private String family_name;
+    private Long salary;
+
+
+    public void setSalary(Long salary) {
+        this.salary = salary;
+    }
+
+    public Long getSalary() {
+        return salary;
+    }
 
     public Long getId() {
         return id;
@@ -23,12 +33,12 @@ public class AdminEditView {
         this.email = email;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getGiven_name() {
+        return given_name;
     }
 
-    public void setGivenName(String firstName) {
-        this.firstName = firstName;
+    public void setGivenName(String given_name) {
+        this.given_name = given_name;
     }
 
     public String getNickname() {
@@ -39,21 +49,21 @@ public class AdminEditView {
         this.nickname = nickname;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getFamily_name() {
+        return family_name;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setFamily_name(String family_name) {
+        this.family_name = family_name;
     }
 
     @Override
     public String toString() {
         return "PersonEditView{" +
                 "email='" + email + '\'' +
-                ", firstName='" + firstName + '\'' +
+                ", given_name='" + given_name + '\'' +
                 ", nickname='" + nickname + '\'' +
-                ", surname='" + surname + '\'' +
+                ", family_name='" + family_name + '\'' +
                 '}';
     }
 }

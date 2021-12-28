@@ -12,6 +12,16 @@ public class AdminBasicView {
      private StringProperty email = new SimpleStringProperty();
      private StringProperty given_name = new SimpleStringProperty();
      private StringProperty family_name = new SimpleStringProperty();
+     private LongProperty salary = new SimpleLongProperty();
+
+
+     public Long getSalary(){
+          return salaryProperty().get();
+     }
+
+     public void setSalary(Long salary){
+          this.salaryProperty().setValue(salary);
+     }
 
 
      public Long getId() {
@@ -72,6 +82,10 @@ public class AdminBasicView {
 
      public StringProperty familyNameProperty() {
      return family_name;
+     }
+
+     public LongProperty salaryProperty(){
+          return salary;
      }
 
      }
