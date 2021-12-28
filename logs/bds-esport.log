@@ -1,0 +1,7 @@
+652  [JavaFX Application Thread] INFO  o.b.f.e.controllers.LoginController - LoginController initialized
+10955 [JavaFX Application Thread] INFO  o.b.f.e.c.AdminsController - PersonsController initialized
+17884 [JavaFX Application Thread] INFO  o.b.f.e.c.AdminCreateController - AdminCreateController initialized
+308634 [JavaFX Application Thread] INFO  o.b.f.e.c.AdminsDetailViewController - AdminsDetailViewController initialized
+704  [JavaFX Application Thread] INFO  o.b.f.e.controllers.LoginController - LoginController initialized
+51953 [JavaFX Application Thread] INFO  o.b.f.e.c.AdminsController - PersonsController initialized
+58047 [JavaFX Application Thread] INFO  o.b.f.e.c.AdminCreateController - AdminCreateController initialized
