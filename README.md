@@ -7,7 +7,6 @@ ERD model can be found here https://github.com/Mousero141/bds-db-design. It's a 
 To run this project from git bash is it essential to download Java JDK and Maven and configure them in the system environment variables.
 
 
-
 ## Startup
 Before start project is necessary to build this project with Maven. You have to change directory to this repo in git bash. 
 After that you can type
