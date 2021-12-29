@@ -1,16 +1,24 @@
 # BPC BDS e-Sport-gui
 ## Info
-Tento projekt je z předmětu BPC-BDS (Bezpečnost databázových systémů) z VUT v Brně. Je napsán v jazyce Java.
-ERD model můžete najít zde https://github.com/Mousero141/bds-db-design.
-
 This project is from subject BPC-BDS (Database security) from BUT in Brno. Is written in Java.
-ERD model can be found here https://github.com/Mousero141/bds-db-design
-
+ERD model can be found here https://github.com/Mousero141/bds-db-design. It's a database for League of Legends e-Sport.
+--------------------------------------------------------------------------------------------
 ## Important
-Ke spuštění tohoto projectu z git bashe je třeba stáhnout a nainstalovat Java JDK a Maven a přidat je do systémových přomměných.
+To run this project from git bash is it essential to download Java JDK and Maven and configure them in the system environment variables.
 
-To run this project from git bash is it essential to download Java JDK and Maven and configure them in the system environment variables. 
+--------------------------------------------------------------------------------------------
 
-## Start the program
+## Startup
+Before start project is necessary to build this project with Maven. You have to change directory to this repo in git bash. 
+After that you can type
 
-Spuštění tohoto projektu je z git bashe, musíte se přesunout do složky repositáře a poté napsat:
+    mvn clean install
+
+If the build is successful you can continue to start
+    
+    java -jar target/bds-e-sport-gui-1.0.0.jar
+
+    email: hrnekdavid@seznam.cz | password: batman 
+
+--------------------------------------------------------------------------------------------
+
