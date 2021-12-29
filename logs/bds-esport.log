@@ -482,3 +482,5 @@ Caused by: java.lang.ClassNotFoundException: org.but.feec.esport.controllers.Adm
 635  [JavaFX Application Thread] INFO  o.b.f.e.controllers.LoginController - LoginController initialized
 10230 [JavaFX Application Thread] INFO  o.b.f.e.c.AdminsController - PersonsController initialized
 13405 [JavaFX Application Thread] INFO  o.b.f.e.c.AdminsController - PersonsController initialized
+570  [JavaFX Application Thread] INFO  o.b.f.e.controllers.LoginController - LoginController initialized
+8694 [JavaFX Application Thread] INFO  o.b.f.e.c.AdminsController - PersonsController initialized
