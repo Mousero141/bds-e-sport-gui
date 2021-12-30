@@ -3,6 +3,7 @@
 *.iws
 logs/
 target/
+target
 *.log
 spring.log*
 
