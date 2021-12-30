@@ -122,7 +122,7 @@ public class AdminsController {
                 AdminDetailView adminDetailView = adminService.getAdminDetailView(adminId);
 
                 stage.setUserData(adminDetailView);
-                stage.setTitle("BDS JavaFX Admins Detailed View");
+                stage.setTitle("BDS eSport Admins Detailed View");
 
                 AdminsDetailViewController controller = new AdminsDetailViewController();
                 controller.setStage(stage);
