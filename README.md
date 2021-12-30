@@ -9,7 +9,9 @@ To run this project from git bash is it essential to download Java JDK and Maven
 ## Setup DB
 - start pgAdmin
 - create new DB named "test"
-- create new login role (use this txt)
+- open "Query Tool" to create new login role (use this txt https://github.com/Mousero141/bds-e-sport-gui/blob/main/Create_user.txt)
+- after that you can restore my db using this backup file https://github.com/Mousero141/bds-e-sport-gui/blob/main/BDS-Project3_1
+- at the end you have to grant privileges to user "ZACHRANCE", for that open "Query Tool" and use this txt https://github.com/Mousero141/bds-e-sport-gui/blob/main/Grant_privileges.txt
 
 ## Startup
 Before start project is necessary to build this project with Maven. You have to change directory to this repo in git bash. 
