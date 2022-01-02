@@ -197,7 +197,7 @@ public class AdminsController {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(App.class.getResource("/org.but.feec.esport/fxml/DetailedView.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 600, 500);
+            Scene scene = new Scene(fxmlLoader.load(), 950, 700);
             Stage stage = new Stage();
             stage.setTitle("BDS eSport detailedView");
             stage.setScene(scene);
