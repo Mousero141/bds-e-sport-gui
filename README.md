@@ -19,7 +19,7 @@ After that you can type
 
     mvn clean install
 
-If the build is successful you can continue to start
+If the build was successful you can continue to start
     
     java -jar target/bds-e-sport-gui-1.0.0.jar
 
